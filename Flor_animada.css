@@ -1,0 +1,195 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    background-size: 400% 400%;
+    animation: fondo-animado 10s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.flor {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-origin: bottom center;
+    transform: scale(0); /* Empieza invisible */
+    animation: crecer 2s ease-out forwards, balanceo 3s ease-in-out 2s infinite, pulso 2s ease-in-out 2s infinite alternate; /* Crece primero, luego balancea */
+}
+
+.centro {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, #3B2314);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    animation: brillo 1.5s ease-in-out 2s infinite alternate; /* Brillo después del crecimiento */
+    box-shadow: 0 0 20px #ffd700;
+    opacity: 0; /* Invisible al inicio */
+    animation: aparecer-centro 1s ease-out 1.5s forwards; /* Aparece después de que la flor crezca */
+}
+
+.petalo {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    background: linear-gradient(45deg, #ffa500, #ffd200, #f9ca24);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    transform: translate(-50%, -50%) scale(0); /* Empiezan cerrados */
+    z-index: 1;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+    animation: abrir-inicial 1.5s ease-out forwards; /* Animación inicial de apertura */
+}
+
+.p1 { animation-delay: 2s; } /* Delay para que empiece después del crecimiento de la flor */
+.p2 { animation-delay: 2.5s; }
+.p3 { animation-delay: 3s; }
+.p4 { animation-delay: 3.5s; }
+.p5 { animation-delay: 4s; }
+.p6 { animation-delay: 4.5s; }
+.p7 { animation-delay: 5s; }
+.p8 { animation-delay: 5.5s; }
+
+.tallo {
+    position: absolute;
+    width: 12px;
+    height: 160px;
+    background: linear-gradient(to bottom, #32cd32, #228b22);
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    z-index: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: aparecer-tallo 1s ease-out 0.5s forwards; /* Aparece durante el crecimiento */
+}
+
+.hoja-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    opacity: 0;
+    animation: aparecer-hojas 1s ease-out 1s forwards; /* Aparecen después del tallo */
+}
+
+.hoja-izq {
+    transform: translateX(-40%) rotate(-30deg);
+    top:85%;
+    left:60%
+}
+
+.hoja-der {
+    transform: translateX(-55%) rotate(30deg);
+    top:85%;
+    left:40%;
+}
+
+.hoja {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    background: linear-gradient(45deg, #00ff7f, #32cd32);
+    border-radius: 50%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    animation: hojas-movimiento 2s ease-in-out 6s infinite, hojas-brillo 3s ease-in-out 6s infinite; /* Empiezan después de los pétalos */
+    box-shadow: 0 0 10px #00ff7f;
+}
+
+/* Animaciones */
+@keyframes fondo-animado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulso {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+@keyframes brillo {
+    0% { box-shadow: 0 0 20px #ffd700; }
+    100% { box-shadow: 0 0 40px #ff4500; }
+}
+
+@keyframes crecer {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+@keyframes aparecer-centro {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes aparecer-tallo {
+    0% { opacity: 0; transform: translateX(-50%) scaleY(0); }
+    100% { opacity: 1; transform: translateX(-50%) scaleY(1); }
+}
+
+@keyframes aparecer-hojas {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes abrir-inicial {
+    0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(360deg); }
+}
+
+@keyframes abrir-petalo {
+    0% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(360deg); }
+}
+
+@keyframes girar-petalo {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes balanceo {
+    0% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(3deg) scale(1.05); }
+    50% { transform: rotate(0deg) scale(1); }
+    75% { transform: rotate(-3deg) scale(0.95); }
+    100% { transform: rotate(0deg) scale(1); }
+}
+
+@keyframes hojas-movimiento {
+    0% { transform: translateX(-50%) rotate(0deg) scale(1); }
+    50% { transform: translateX(-50%) rotate(10deg) scale(1.1); }
+    100% { transform: translateX(-50%) rotate(0deg) scale(1); }
+}
+
+@keyframes hojas-brillo {
+    0% { box-shadow: 0 0 10px #00ff7f; }
+    50% { box-shadow: 0 0 20px #32cd32; }
+    100% { box-shadow: 0 0 10px #00ff7f; }
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+    .flor { width: 150px; height: 150px; }
+    .petalo { width: 60px; height: 20px; }
+    .hoja { width: 45px; height: 20px; }
+    .tallo { height: 120px; }
+}
